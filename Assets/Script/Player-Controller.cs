@@ -5,9 +5,15 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpPower = 12f;
 
+    // 地上ジャンプを含めた最大ジャンプ回数
+    public int maxJumpCount = 2;
+
     Rigidbody2D rb;
     public bool isGrounded;
     Vector2 respawnPosition;
+
+    // 現在のジャンプ回数
+    int jumpCount;
 
     void Start()
     {
@@ -24,13 +30,16 @@ public class PlayerMove : MonoBehaviour
             rb.linearVelocity.y
         );
 
-        if (Input.GetButton("Jump") && isGrounded)
+        // ジャンプボタンを押した瞬間に実行
+        if (Input.GetButtonDown("Jump") &&
+            jumpCount < maxJumpCount)
         {
             rb.linearVelocity = new Vector2(
                 rb.linearVelocity.x,
                 jumpPower
             );
 
+            jumpCount++;
             isGrounded = false;
         }
     }
@@ -40,6 +49,9 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+
+            // 地面に触れたらジャンプ回数をリセット
+            jumpCount = 0;
         }
     }
 
@@ -64,6 +76,8 @@ public class PlayerMove : MonoBehaviour
     {
         rb.linearVelocity = Vector2.zero;
         rb.position = respawnPosition;
+
         isGrounded = false;
+        jumpCount = 0;
     }
 }

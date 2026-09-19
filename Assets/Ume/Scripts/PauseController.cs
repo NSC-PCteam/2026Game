@@ -12,6 +12,9 @@ public class PauseController : MonoBehaviour
     [Header("シーン名設定")]
     [SerializeField] private string titleSceneName = "Ume_StartScene"; // タイトルシーンの名前
 
+    [Header("他システム参照")]
+    [SerializeField] private GameOverManager gameOverManager; // ゲームオーバー管理スクリプトの参照
+
     private bool isPaused = false; // ポーズ状態のフラグ
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,6 +49,11 @@ public class PauseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(gameOverManager != null && gameOverManager.IsGameOver)
+        {
+            return; // ゲームオーバー状態の場合はポーズの切り替えを無効化
+        }
+
         if(Input.GetKeyDown(KeyCode.Escape)) // Escapeキーが押されたとき
         {
             if(isPaused)

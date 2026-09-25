@@ -3,6 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
+  tags: []
   tags:
   - Ground
   - Spike
@@ -10,6 +11,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
+  - Ground
   - stage
   - Water
   - UI

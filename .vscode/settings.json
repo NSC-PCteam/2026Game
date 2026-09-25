@@ -68,5 +68,5 @@
         "*.slnx": "*.csproj"
     },
     "dotnet.enableWorkspaceBasedDevelopment": false,
-    "dotnet.defaultSolution": "2026Game.slnx"
+    "dotnet.defaultSolution": "2026game.slnx"
 }

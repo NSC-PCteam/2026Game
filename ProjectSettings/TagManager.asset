@@ -4,25 +4,29 @@
 TagManager:
   serializedVersion: 3
   tags: []
+  tags:
+  - Ground
+  - Spike
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
   - Ground
+  - stage
   - Water
   - UI
+  - player
+  - enemy
+  - water
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - dash
+  - doubleJump
+  - swim
+  - small
+  - clime
+  - invincible
+  - tfPlusTime
+  - lifePoint
   - 
   - 
   - 

@@ -10,21 +10,21 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - stage
   - Water
   - UI
+  - player
+  - enemy
+  - water
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - dash
+  - doubleJump
+  - swim
+  - small
+  - clime
+  - invincible
+  - tfPlusTime
+  - lifePoint
   - 
   - 
   - 

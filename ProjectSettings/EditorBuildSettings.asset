@@ -15,6 +15,9 @@ EditorBuildSettings:
     guid: cb6a5b63a4cce744bb8d86ab0b1fa89c
   - enabled: 1
     path: Assets/Ume/Scenes/Ume_GameTest.unity
+    guid: b8308f61c15beac46a0efe5b20d596a7
+  - enabled: 0
+    path: Assets/Ume/Scenes/Ume_PauseTest.unity
     guid: 71d1c8ca7e74b814586b6b054332b041
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

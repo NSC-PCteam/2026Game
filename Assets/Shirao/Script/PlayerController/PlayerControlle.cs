@@ -83,6 +83,10 @@ public class PlayerControlle : MonoBehaviour
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
             }
+            if(tfControlle.tfPhase=="climb" && (upAndSideCollision.triggerPhase=="rightWall" || upAndSideCollision.triggerPhase=="leftWall"))
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
+            }
         }
 
         //攻撃処理（銃）

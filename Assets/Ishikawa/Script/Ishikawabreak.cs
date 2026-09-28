@@ -6,9 +6,9 @@ public class Ishikawabreak : MonoBehaviour
     public Sprite crackSprite;       // ひび割れ
     public Sprite breakSprite;       // 崩れる直前
 
-    public float crackTime = 1f;     // 乗って1秒後にひび割れ
-    public float breakTime = 2f;     // さらに1秒後に崩れる
-     public float destroyDelay = 2f;  // 崩れた後に消えるまでの時間 ← 追加！
+    public float crackTime = 1f;     // ひび割れまでの時間
+    public float breakTime = 2f;     // 崩れるまでの時間
+    public float destroyTime = 3f;   // 完全に消えるまでの時間
 
     private SpriteRenderer sr;
     private bool isStepped = false;
@@ -22,7 +22,6 @@ public class Ishikawabreak : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // プレイヤーが乗ったら開始
         if (collision.gameObject.tag == "Player")
         {
             isStepped = true;
@@ -35,16 +34,20 @@ public class Ishikawabreak : MonoBehaviour
 
         timer += Time.deltaTime;
 
+        // ひび割れ
         if (timer > crackTime && timer < breakTime)
         {
             sr.sprite = crackSprite;
         }
-        else if (timer > breakTime)
+        // 崩れる直前
+        else if (timer > breakTime && timer < destroyTime)
         {
             sr.sprite = breakSprite;
-
-            // 崩れた後に消えるまでの時間を調整可能
-            Destroy(gameObject, destroyDelay);
+        }
+        // 完全に消える
+        else if (timer > destroyTime)
+        {
+            Destroy(gameObject);
         }
     }
 }

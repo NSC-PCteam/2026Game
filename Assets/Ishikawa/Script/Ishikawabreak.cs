@@ -8,6 +8,7 @@ public class Ishikawabreak : MonoBehaviour
 
     public float crackTime = 1f;     // 乗って1秒後にひび割れ
     public float breakTime = 2f;     // さらに1秒後に崩れる
+     public float destroyDelay = 2f;  // 崩れた後に消えるまでの時間 ← 追加！
 
     private SpriteRenderer sr;
     private bool isStepped = false;
@@ -42,8 +43,8 @@ public class Ishikawabreak : MonoBehaviour
         {
             sr.sprite = breakSprite;
 
-            // 2秒後に消える
-            Destroy(gameObject, 2f);
+            // 崩れた後に消えるまでの時間を調整可能
+            Destroy(gameObject, destroyDelay);
         }
     }
 }

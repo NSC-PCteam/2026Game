@@ -1,13 +1,13 @@
 using UnityEngine;
 
-
-
-
 [RequireComponent(typeof(Rigidbody2D))]
 public class ProjectileLauncher : MonoBehaviour
 {
     float timer = 0f;
-    [SerializeField] private float speed = 10f;
+
+    [SerializeField] private float speed = 20f;
+
+    public float angle = 60f;
 
     private Rigidbody2D rb;
 
@@ -18,7 +18,8 @@ public class ProjectileLauncher : MonoBehaviour
 
     private void Start()
     {
-        float angle = 60f;
+        speed = 20f;
+
         float rad = angle * Mathf.Deg2Rad;
 
         Vector2 direction = new Vector2(
@@ -33,7 +34,7 @@ public class ProjectileLauncher : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (timer >= 2f)
+        if (timer >= 5f)
         {
             Destroy(gameObject);
         }

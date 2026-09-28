@@ -1,4 +1,9 @@
 using UnityEngine;
+// using System.Diagnostics;
+
+
+// using System.Threading.Tasks.Dataflow;
+
 
 public class IshikawaSlideFloor : MonoBehaviour
 {
@@ -22,6 +27,8 @@ public class IshikawaSlideFloor : MonoBehaviour
 
             if (Mathf.Abs(transform.position.x - startPos.x) > moveDistance)
             {
+                // Debug.Log(transform.position);
+                // Debug.Log(startPos);
                 direction *= -1;
             }
         }
@@ -35,4 +42,20 @@ public class IshikawaSlideFloor : MonoBehaviour
             }
         }
     }
+void OnCollisionEnter2D(Collision2D collision)
+{
+    if (collision.gameObject.CompareTag("Player"))
+    {
+        collision.transform.SetParent(transform);
+    }
 }
+
+void OnCollisionExit2D(Collision2D collision)
+{
+    if (collision.gameObject.CompareTag("Player"))
+    {
+        collision.transform.SetParent(null);
+    }
+   }
+}
+

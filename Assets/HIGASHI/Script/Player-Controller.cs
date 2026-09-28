@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     Vector2 respawnPosition;
 
     // 現在のジャンプ回数
-    int jumpCount;
+    int jumpCount = 0;
 
     void Start()
     {
@@ -34,12 +34,15 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetButtonDown("Jump") &&
             jumpCount < maxJumpCount)
         {
+            
             rb.linearVelocity = new Vector2(
                 rb.linearVelocity.x,
                 jumpPower
             );
 
-            jumpCount++;
+            // Debug.Log(jumpCount);
+            jumpCount = jumpCount + 1;
+            // Debug.Log(jumpCount);
             isGrounded = false;
         }
     }
@@ -48,9 +51,11 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            // Debug.Log(collision.gameObject.name);
             isGrounded = true;
 
             // 地面に触れたらジャンプ回数をリセット
+            // Debug.Log("Reset");
             jumpCount = 0;
         }
     }

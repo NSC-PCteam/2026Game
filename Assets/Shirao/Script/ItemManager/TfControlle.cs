@@ -145,8 +145,6 @@ public class TfControlle : MonoBehaviour
         while(time<tfInterval+tfTime)
         {
             time += Time.fixedDeltaTime;
-            //Debug.Log($"time={time}, tfTime={tfTime}, tfInterval={tfInterval}");
-            //Debug.Log($"(time-tfTime)/tfInterval={(time-tfTime)/tfInterval}");
             tfTimeSlider.value = (time-tfTime)/tfInterval;
             yield return new WaitForFixedUpdate();
         }

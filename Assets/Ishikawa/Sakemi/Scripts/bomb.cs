@@ -11,6 +11,9 @@ public class ProjectileLauncher : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    [SerializeField] private LayerMask groundLayer;
+    private bool isGrounded = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,11 +33,27 @@ public class ProjectileLauncher : MonoBehaviour
         rb.linearVelocity = direction * speed;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if ((groundLayer.value & (1 << collision.gameObject.layer)) != 0)
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if ((groundLayer.value & (1 << collision.gameObject.layer)) != 0)
+        {
+            isGrounded = false;
+        }
+    }
+
     void Update()
     {
         timer += Time.deltaTime;
 
-        if (timer >= 5f)
+        if (timer >= 5f || isGrounded == true)
         {
             Destroy(gameObject);
         }

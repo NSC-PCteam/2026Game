@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TfControlle : MonoBehaviour
 {
     public static TfControlle Instance { get; private set; }
     public float tfTime;
+    public Slider tfTimeSlider;
+    public Image sliderColor;
     [SerializeField] private float tfInterval;
     public string tfPhase;
     public List<int> tfItemLayerNum;
@@ -124,17 +127,27 @@ public class TfControlle : MonoBehaviour
                 break;
         }
 
+        sliderColor.color = new Color32(0, 255, 0, 255);
+
         float time=0f;
    
         while(time<tfTime)
         {
             time += Time.fixedDeltaTime;
+            tfTimeSlider.value = 1-time/tfTime;
             yield return new WaitForFixedUpdate();
         }
 
         if(tfPhase==phase) tfPhase="idle";
-   
-        yield return new WaitForSeconds(tfInterval);
+
+        sliderColor.color = new Color32(175, 175, 175, 255);
+
+        while(time<tfInterval+tfTime)
+        {
+            time += Time.fixedDeltaTime;
+            tfTimeSlider.value = (time-tfTime)/tfInterval;
+            yield return new WaitForFixedUpdate();
+        }
 
         switch(phase)
         {

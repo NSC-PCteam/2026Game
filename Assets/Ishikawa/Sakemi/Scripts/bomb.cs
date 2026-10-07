@@ -3,26 +3,21 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class ProjectileLauncher : MonoBehaviour
 {
-    float timer = 0f;
+    [SerializeField] private float speed = 200000f;
+    [SerializeField] public float angle = 60f;
 
-    [SerializeField] private float speed = 20f;
-
-    public float angle = 60f;
-
+    private float timer = 0f;
     private Rigidbody2D rb;
-
-    [SerializeField] private LayerMask groundLayer;
-    private bool isGrounded = false;
+    private Collider2D myCollider;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        myCollider = GetComponent<Collider2D>();
     }
 
     private void Start()
     {
-        speed = 20f;
-
         float rad = angle * Mathf.Deg2Rad;
 
         Vector2 direction = new Vector2(
@@ -33,27 +28,18 @@ public class ProjectileLauncher : MonoBehaviour
         rb.linearVelocity = direction * speed;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if ((groundLayer.value & (1 << collision.gameObject.layer)) != 0)
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if ((groundLayer.value & (1 << collision.gameObject.layer)) != 0)
-        {
-            isGrounded = false;
-        }
-    }
-
-    void Update()
+    private void Update()
     {
         timer += Time.deltaTime;
 
-        if (timer >= 5f || isGrounded == true)
+        bool isGrounded = Physics2D.OverlapBox(
+            myCollider.bounds.center,
+            myCollider.bounds.size,
+            0f,
+            LayerMask.GetMask("Ground")
+        );
+
+        if (timer >= 5f || isGrounded)
         {
             Destroy(gameObject);
         }

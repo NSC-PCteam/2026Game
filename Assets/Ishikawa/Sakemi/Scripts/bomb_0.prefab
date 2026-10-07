@@ -169,5 +169,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85fbd87dc004ec4e9aba75de3098ab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileLauncher
-  speed: 10
+  speed: 20
   angle: 60

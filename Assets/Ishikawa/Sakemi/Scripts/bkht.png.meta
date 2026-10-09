@@ -1,50 +1,34 @@
 fileFormatVersion: 2
-guid: 17f1500d499e1e546814f4f32624b47e
-AssetOrigin:
-  serializedVersion: 1
-  productId: 155418
-  packageName: Pixel Adventure 2
-  packageVersion: 1.0
-  assetPath: Assets/Pixel Adventure 2/Assets/Enemies/Bat/Idle (46x30).png
-  uploadId: 332915
+guid: eee173f247852b74e9ba8a7e446f9d9e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8538975791002790759
-    second: Idle (46x30)_0
+      213: 877528864325601263
+    second: bakuhatsu1_0
   - first:
-      213: -4939815841697185048
-    second: Idle (46x30)_1
+      213: -5561097366107192916
+    second: bakuhatsu1_1
   - first:
-      213: 8727787967152150381
-    second: Idle (46x30)_2
+      213: -4565470433804345013
+    second: bakuhatsu1_2
   - first:
-      213: 1576231561992426011
-    second: Idle (46x30)_3
+      213: -992791818393928067
+    second: bakuhatsu1_3
   - first:
-      213: -2187149976441939915
-    second: Idle (46x30)_4
+      213: -8466326512352446243
+    second: bakuhatsu1_4
   - first:
-      213: -2722364994389254712
-    second: Idle (46x30)_5
+      213: 4842996892759474165
+    second: bakuhatsu1_5
   - first:
-      213: 5303059572689928323
-    second: Idle (46x30)_6
+      213: -706244491283266129
+    second: bakuhatsu1_6
   - first:
-      213: 5485839626614507125
-    second: Idle (46x30)_7
+      213: -3976082373610252718
+    second: bakuhatsu1_7
   - first:
-      213: -261532773605354177
-    second: Idle (46x30)_8
-  - first:
-      213: 4901374318200241304
-    second: Idle (46x30)_9
-  - first:
-      213: 8716790705671539678
-    second: Idle (46x30)_10
-  - first:
-      213: -4276771581791193331
-    second: Idle (46x30)_11
+      213: 2484875688606636403
+    second: bakuhatsu1_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -77,7 +61,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -91,7 +75,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 30
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -106,16 +90,16 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -128,7 +112,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -140,265 +124,199 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle (46x30)_0
+      name: bakuhatsu1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 46
-        height: 30
+        x: 42
+        y: 406
+        width: 49
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: b7889e58c333883498f063289b83c021
-      internalID: 8538975791002790759
+      spriteID: fe7874e4adb9d2c00800000000000000
+      internalID: 877528864325601263
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle (46x30)_1
+      name: bakuhatsu1_1
       rect:
         serializedVersion: 2
-        x: 46
-        y: 0
-        width: 46
-        height: 30
+        x: 49
+        y: 76
+        width: 401
+        height: 375
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: adf7532d6b0eeb441acb5323d2d3ca04
-      internalID: -4939815841697185048
+      spriteID: ca102d3d86303d2b0800000000000000
+      internalID: -5561097366107192916
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle (46x30)_2
+      name: bakuhatsu1_2
       rect:
         serializedVersion: 2
-        x: 92
-        y: 0
-        width: 46
-        height: 30
+        x: 161
+        y: 438
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 7ce5928bac1cdfb4dbf991a99bb80800
-      internalID: 8727787967152150381
+      spriteID: b412b8054d034a0c0800000000000000
+      internalID: -4565470433804345013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle (46x30)_3
+      name: bakuhatsu1_3
       rect:
         serializedVersion: 2
-        x: 138
-        y: 0
+        x: 219
+        y: 448
         width: 46
-        height: 30
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: a3c2976852b6bb2429f8de8db17d1fb6
-      internalID: 1576231561992426011
+      spriteID: d7e37b8e915e832f0800000000000000
+      internalID: -992791818393928067
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle (46x30)_4
+      name: bakuhatsu1_4
       rect:
         serializedVersion: 2
-        x: 184
-        y: 0
-        width: 46
-        height: 30
+        x: 394
+        y: 408
+        width: 47
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 83c516bd167b5c14e8ba6918a6ae189d
-      internalID: -2187149976441939915
+      spriteID: dd8b2ceb4e0918a80800000000000000
+      internalID: -8466326512352446243
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle (46x30)_5
+      name: bakuhatsu1_5
       rect:
         serializedVersion: 2
-        x: 230
-        y: 0
-        width: 46
-        height: 30
+        x: 435
+        y: 169
+        width: 44
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f085eea2c57bf524c9b855eda9da4284
-      internalID: -2722364994389254712
+      spriteID: 5ffbf31c308c53340800000000000000
+      internalID: 4842996892759474165
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle (46x30)_6
+      name: bakuhatsu1_6
       rect:
         serializedVersion: 2
-        x: 276
-        y: 0
-        width: 46
-        height: 30
+        x: 130
+        y: 63
+        width: 47
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 183634e7a0b19144f89261a0ce51bc9a
-      internalID: 5303059572689928323
+      spriteID: fa50c74806ae236f0800000000000000
+      internalID: -706244491283266129
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle (46x30)_7
+      name: bakuhatsu1_7
       rect:
         serializedVersion: 2
-        x: 322
-        y: 0
-        width: 46
-        height: 30
+        x: 258
+        y: 31
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: ba9b7fec11d569345b1940f3514a214d
-      internalID: 5485839626614507125
+      spriteID: 256d44bb52e12d8c0800000000000000
+      internalID: -3976082373610252718
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle (46x30)_8
+      name: bakuhatsu1_8
       rect:
         serializedVersion: 2
-        x: 368
-        y: 0
-        width: 46
-        height: 30
+        x: 354
+        y: 14
+        width: 43
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: a4a6aaf82e673674abc772403a6e6192
-      internalID: -261532773605354177
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle (46x30)_9
-      rect:
-        serializedVersion: 2
-        x: 414
-        y: 0
-        width: 46
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 426f0aa1032e05547bc605d94b0e66e4
-      internalID: 4901374318200241304
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle (46x30)_10
-      rect:
-        serializedVersion: 2
-        x: 460
-        y: 0
-        width: 46
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0be47151a7b11bf47945ae3c64ab78c8
-      internalID: 8716790705671539678
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle (46x30)_11
-      rect:
-        serializedVersion: 2
-        x: 506
-        y: 0
-        width: 46
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cc862eae235d86f44bc7354fcb2e2b7c
-      internalID: -4276771581791193331
+      spriteID: 379176af54d0c7220800000000000000
+      internalID: 2484875688606636403
       vertices: []
       indices: 
       edges: []
@@ -407,7 +325,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -417,18 +335,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Idle (46x30)_0: 8538975791002790759
-      Idle (46x30)_1: -4939815841697185048
-      Idle (46x30)_10: 8716790705671539678
-      Idle (46x30)_11: -4276771581791193331
-      Idle (46x30)_2: 8727787967152150381
-      Idle (46x30)_3: 1576231561992426011
-      Idle (46x30)_4: -2187149976441939915
-      Idle (46x30)_5: -2722364994389254712
-      Idle (46x30)_6: 5303059572689928323
-      Idle (46x30)_7: 5485839626614507125
-      Idle (46x30)_8: -261532773605354177
-      Idle (46x30)_9: 4901374318200241304
+      bakuhatsu1_0: 877528864325601263
+      bakuhatsu1_1: -5561097366107192916
+      bakuhatsu1_2: -4565470433804345013
+      bakuhatsu1_3: -992791818393928067
+      bakuhatsu1_4: -8466326512352446243
+      bakuhatsu1_5: 4842996892759474165
+      bakuhatsu1_6: -706244491283266129
+      bakuhatsu1_7: -3976082373610252718
+      bakuhatsu1_8: 2484875688606636403
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

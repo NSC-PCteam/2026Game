@@ -19,9 +19,26 @@ public class TfTimeSlider : MonoBehaviour
         }
         if(tfControlle.tfItemInventory.Count>0)
         {
-            foreach(int tfItemInventoryNum in tfControlle.tfItemInventory)
+            foreach(string tfItemInventoryName in tfControlle.tfItemInventory)
             {
-                tfTimeSliderObj[tfItemInventoryNum].SetActive(true);
+                switch(tfItemInventoryName)
+                {
+                    case "Dash":
+                        tfTimeSliderObj[0].SetActive(true);
+                        break;
+                    case "Jump":
+                        tfTimeSliderObj[1].SetActive(true);
+                        break;
+                    case "Swim":
+                        tfTimeSliderObj[2].SetActive(true);
+                        break;
+                    case "Small":
+                        tfTimeSliderObj[3].SetActive(true);
+                        break;
+                    case "Climb":
+                        tfTimeSliderObj[4].SetActive(true);
+                        break;
+                }
             }
         }
     }

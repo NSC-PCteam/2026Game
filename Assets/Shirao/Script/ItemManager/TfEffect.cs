@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+//using System.Numerics;
 using UnityEngine;
 
 public class TfEffect : MonoBehaviour
@@ -14,6 +16,7 @@ public class TfEffect : MonoBehaviour
     [SerializeField] private string dashPhase;
     [SerializeField] private string playerDirection;
     [SerializeField] private float dashForce;
+    [SerializeField] private float upDashForce;
     [SerializeField] private float dashTime;
     [SerializeField] private float dashColeDownTime;
     [SerializeField] private float doubleJumpSpeed;
@@ -21,7 +24,9 @@ public class TfEffect : MonoBehaviour
     [SerializeField] private float swimFloatSpeed;
     [SerializeField] private float swimWaterAcceleration;
     [SerializeField] private float swimWaterDeceleration;
-    [SerializeField] private float scale;
+    [SerializeField] private Vector3 normalScale;
+    [SerializeField] private Vector3 smallScale;
+    [SerializeField] private float smallTime;
     private bool notDoubleJumped=true;
     private Vector2 swimVelocity;
 
@@ -39,14 +44,14 @@ public class TfEffect : MonoBehaviour
             case "idle":
                 if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
                 {
-                    player.position = new Vector3(player.position.x, player.position.y+rayCastForSmall.biggerDistance, 0f);
+                    StartCoroutine(Learger());
                 }
-                player.localScale = new Vector3(1, 1, 1);
+                //player.localScale = new Vector3(1, 1, 1);
                 break;
             case "dash":
                 if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
                 {
-                    player.position = new Vector3(player.position.x, player.position.y+rayCastForSmall.biggerDistance, 0f);
+                    StartCoroutine(Learger());
                 }
                 player.localScale = new Vector3(1, 1, 1);
                 if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
@@ -66,7 +71,7 @@ public class TfEffect : MonoBehaviour
             case "doubleJump":
                 if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
                 {
-                    player.position = new Vector3(player.position.x, player.position.y+rayCastForSmall.biggerDistance, 0f);
+                    StartCoroutine(Learger());
                 }
                 player.localScale = new Vector3(1, 1, 1);
                 if(downCollision.triggerPhase=="stage")
@@ -86,7 +91,7 @@ public class TfEffect : MonoBehaviour
             case "swim":
                 if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
                 {
-                    player.position = new Vector3(player.position.x, player.position.y+rayCastForSmall.biggerDistance, 0f);
+                    StartCoroutine(Learger());
                 }
                 player.localScale = new Vector3(1, 1, 1);
                 if((waterTrigger.triggerPhase=="water"))
@@ -134,12 +139,12 @@ public class TfEffect : MonoBehaviour
                 }
                 break;
             case "small":
-                player.localScale = new Vector3(scale, scale, scale);
+                StartCoroutine(Smaller());
                 break;
             case "climb":
                 if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
                 {
-                    player.position = new Vector3(player.position.x, player.position.y+rayCastForSmall.biggerDistance, 0f);
+                    StartCoroutine(Learger());
                 }
                 player.localScale = new Vector3(1, 1, 1);
                 break;
@@ -154,6 +159,7 @@ public class TfEffect : MonoBehaviour
 
         if(playerDirection=="right")
         {
+            playerControlle.rb.AddForce(Vector2.up*upDashForce);
             while(time<dashTime)
             {
                 playerControlle.rb.AddForce(Vector2.right * dashForce);
@@ -163,8 +169,10 @@ public class TfEffect : MonoBehaviour
         }
         else if(playerDirection=="left")
         {
+            playerControlle.rb.AddForce(Vector2.up*upDashForce);
             while(time<dashTime)
             {
+                playerControlle.rb.AddForce(Vector2.up*50);
                 playerControlle.rb.AddForce(Vector2.left * dashForce);
                 time += Time.fixedDeltaTime;
                 yield return new WaitForFixedUpdate();
@@ -173,6 +181,33 @@ public class TfEffect : MonoBehaviour
 
         yield return new WaitForSeconds(dashColeDownTime);
         dashPhase="notDash";
+    }
+
+    private IEnumerator Learger()
+    {
+        float timer = 0f;
+        if(player.localScale!=normalScale)
+        {
+            while(timer<smallTime)
+            {
+                timer += Time.deltaTime;
+                float t = Mathf.Clamp01(timer/smallTime);
+                player.localScale = Vector3.Lerp(smallScale, normalScale, t);
+                yield return null;
+            }
+        }
+    }
+
+    private IEnumerator Smaller()
+    {
+        float timer =0f;
+        while(timer<smallTime)
+        {
+            timer += Time.deltaTime;
+            float t =Mathf.Clamp01(timer/smallTime);
+            player.localScale = Vector3.Lerp(normalScale, smallScale, t);
+            yield return null;
+        }
     }
 
     // private IEnumerator Swim()

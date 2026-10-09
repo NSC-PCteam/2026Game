@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class ProjectileLauncher : MonoBehaviour
 {
-    [SerializeField] private float speed = 200000f;
+    [SerializeField] private float speed = 20f;
     [SerializeField] public float angle = 60f;
 
     private float timer = 0f;

@@ -14,6 +14,7 @@ public class PauseController : MonoBehaviour
 
     [Header("他システム参照")]
     [SerializeField] private GameOverManager gameOverManager; // ゲームオーバー管理スクリプトの参照
+    [SerializeField] private GameClearManager gameClearManager; // インスペクターまたはAwakeで取得
 
     private bool isPaused = false; // ポーズ状態のフラグ
 
@@ -44,12 +45,16 @@ public class PauseController : MonoBehaviour
             return;
         }
 
+        if (gameClearManager == null)
+        {
+            gameClearManager = FindAnyObjectByType<GameClearManager>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(gameOverManager != null && gameOverManager.IsGameOver)
+        if((gameOverManager != null && gameOverManager.IsGameOver) || (gameClearManager != null && gameClearManager.IsGameClear))
         {
             return; // ゲームオーバー状態の場合はポーズの切り替えを無効化
         }

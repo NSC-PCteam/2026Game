@@ -78,14 +78,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28d17c8c17f478418cb506d649c44aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tfTime: 5
   tfTimeSlider: {fileID: 0}
-  sliderColor: {fileID: 0}
+  tfTime: 5
   tfInterval: 10
   tfPhase: 
-  tfItemLayerNum: 0b0000000c0000000d0000000e0000000f000000
+  tfItemLayerNum: 000000000b0000000c0000000d0000000e0000000f000000
   tfItemInventory: 10000000110000001200000013000000
-  canTf: 
+  usingTfTime:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  canTfPhase:
+  - canTf
+  - canTf
+  - canTf
+  - canTf
+  - canTf
+  - canTf
 --- !u!1 &1682075060932900216
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,6 +150,38 @@ MonoBehaviour:
   distance: 0.6
   enemyLayerNum: 8
   stageLayerNum: 3
+--- !u!1 &2928121546623318496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6825951971014272448}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6825951971014272448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2928121546623318496}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2443494149095795209}
+  m_Father: {fileID: 8326963609713118556}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3807636779361264372
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,5 +470,69 @@ Transform:
   m_Children:
   - {fileID: 3064262888727019069}
   - {fileID: 5721946530428941252}
+  - {fileID: 6825951971014272448}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8832392456440837399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2443494149095795209}
+  - component: {fileID: 3225480826502176167}
+  m_Layer: 0
+  m_Name: TfImange
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2443494149095795209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8832392456440837399}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6825951971014272448}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3225480826502176167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8832392456440837399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6de145e3d51fbf245a652be1b77eff59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TfTimeSlider
+  tfControlle: {fileID: 0}
+  tfTimeSliderObj:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  tfTimeSlider:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  sliderColor:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

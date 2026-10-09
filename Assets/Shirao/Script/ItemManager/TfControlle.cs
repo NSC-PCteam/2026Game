@@ -5,15 +5,17 @@ using UnityEngine.UI;
 
 public class TfControlle : MonoBehaviour
 {
+    public TfTimeSlider tfTimeSlider;
     public static TfControlle Instance { get; private set; }
     public float tfTime;
-    public Slider tfTimeSlider;
-    public Image sliderColor;
-    [SerializeField] private float tfInterval;
+    public float tfInterval;
     public string tfPhase;
+    public List<Slider> tfSlider;
+    public List<Image> sliderColor;
     public List<int> tfItemLayerNum;
     public List<int> tfItemInventory;
-    public List<bool> canTf;
+    public List<float> usingTfTime = new List<float>(){0f, 0f, 0f, 0f, 0f, 0f};
+    public List<string> canTfPhase = new List<string>(){"canTf", "canTf", "canTf", "canTf", "canTf", "canTf"};
 
     //シーンをまたいでスクリプトをアタッチしたゲームオブジェクトの保存
     void Awake()
@@ -36,137 +38,135 @@ public class TfControlle : MonoBehaviour
     {
         tfPhase="idle";
         tfItemInventory.Clear();
-        for(int i=0; i<5; i++)
-        {
-            canTf.Add(true);
-        }
     }
 
     //変身操作処理
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetKeyDown(KeyCode.KeypadPlus))
         {
+            if(tfTimeSlider.tfCanvas.activeSelf)
+            {
+                tfTimeSlider.tfCanvas.SetActive(false);
+            }
+            else
+            {
+                tfTimeSlider.tfCanvas.SetActive(true);
+            }
+        }
+        // if(Input.GetKeyUp(KeyCode.KeypadPlus))
+        // {
+        //     tfTimeSlider.tfCanvas.SetActive(false);
+        // }
+
+        if(Input.GetKeyDown(KeyCode.Keypad5))
+        {
+            TfColorReset(tfPhase);
             tfPhase = "idle";
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha2) && canTf[0])
+        else if(Input.GetKeyDown(KeyCode.Keypad7))
         {
             foreach(int tfItemInventoryNum in tfItemInventory)
             {
                 if(tfItemInventoryNum==tfItemLayerNum[0])
                 {
-                    tfPhase = "dash";
-                    StartCoroutine(TfTime(tfPhase));
+                    if(canTfPhase[0]=="canTf")
+                    {
+                        TfColorReset(tfPhase);
+                        tfPhase = "dash";
+                        StartCoroutine(TfTime(tfPhase, 0));
+                    }
                 }
             }
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha3) && canTf[1])
+        else if(Input.GetKeyDown(KeyCode.Keypad8))
         {
             foreach(int tfItemInventoryNum in tfItemInventory)
             {
                 if(tfItemInventoryNum==tfItemLayerNum[1])
                 {
-                    tfPhase = "doubleJump";
-                    StartCoroutine(TfTime(tfPhase));
+                    if(canTfPhase[1]=="canTf")
+                    {
+                        TfColorReset(tfPhase);
+                        tfPhase = "doubleJump";
+                        StartCoroutine(TfTime(tfPhase, 1));
+                    }
                 }
             }
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha4) && canTf[2])
+        else if(Input.GetKeyDown(KeyCode.Keypad9))
         {
             foreach(int tfItemInventoryNum in tfItemInventory)
             {
                 if(tfItemInventoryNum==tfItemLayerNum[2])
                 {
-                    tfPhase = "swim";
-                    StartCoroutine(TfTime(tfPhase));
+                    if(canTfPhase[2]=="canTf")
+                    {
+                        TfColorReset(tfPhase);
+                        tfPhase = "swim";
+                        StartCoroutine(TfTime(tfPhase, 2));
+                    }
                 }
             }
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha5) && canTf[3])
+        else if(Input.GetKeyDown(KeyCode.Keypad4))
         {
             foreach(int tfItemInventoryNum in tfItemInventory)
             {
                 if(tfItemInventoryNum==tfItemLayerNum[3])
                 {
-                    tfPhase = "small";
-                    StartCoroutine(TfTime(tfPhase));
+                    if(canTfPhase[3]=="canTf")
+                    {
+                        TfColorReset(tfPhase);
+                        tfPhase = "small";
+                        StartCoroutine(TfTime(tfPhase, 3));
+                    }
                 }
             }
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha6) && canTf[4])
+        else if(Input.GetKeyDown(KeyCode.Keypad6))
         {
             foreach(int tfItemInventoryNum in tfItemInventory)
             {
                 if(tfItemInventoryNum==tfItemLayerNum[4])
                 {
-                    tfPhase = "climb";
-                    StartCoroutine(TfTime(tfPhase));
+                    if(canTfPhase[4]=="canTf")
+                    {
+                        TfColorReset(tfPhase);
+                        tfPhase = "climb";
+                        StartCoroutine(TfTime(tfPhase, 4));
+                    }
                 }
             }
         }
     }
 
-    private IEnumerator TfTime(string phase)
+    private IEnumerator TfTime(string phase, int tfNum)
     {
-        switch(phase)
-        {
-            case "dash":   
-                canTf[0]=false;
-                break;
-            case "doubleJump":
-                canTf[1]=false;
-                break;
-            case "swim":
-                canTf[2]=false;
-                break;
-            case "small":
-                canTf[3]=false;
-                break;
-            case "climb":
-                canTf[4]=false;
-                break;
-        }
-
-        sliderColor.color = new Color32(0, 255, 0, 255);
-
-        float time=0f;
+        canTfPhase[tfNum] = "interval";
+        usingTfTime[tfNum]=0f;
+        sliderColor[tfNum].color = new Color(0f, 255f, 0f, 255f);
    
-        while(time<tfTime)
+        while(usingTfTime[tfNum]<tfTime)
         {
-            time += Time.fixedDeltaTime;
-            tfTimeSlider.value = 1-time/tfTime;
+            usingTfTime[tfNum] += Time.fixedDeltaTime;
+            tfSlider[tfNum].value = 1-usingTfTime[tfNum]/tfTime;
             yield return new WaitForFixedUpdate();
         }
 
         if(tfPhase==phase) tfPhase="idle";
+        sliderColor[tfNum].color = new Color(175f, 175f, 175f, 255f);
 
-        sliderColor.color = new Color32(175, 175, 175, 255);
-
-        while(time<tfInterval+tfTime)
+        while(usingTfTime[tfNum]<tfInterval+tfTime)
         {
-            time += Time.fixedDeltaTime;
-            tfTimeSlider.value = (time-tfTime)/tfInterval;
+            usingTfTime[tfNum] += Time.fixedDeltaTime;
+            tfSlider[tfNum].value = (usingTfTime[tfNum]-tfTime)/tfInterval;
             yield return new WaitForFixedUpdate();
         }
 
-        switch(phase)
-        {
-            case "dash":   
-                canTf[0]=true;
-                break;
-            case "doubleJump":
-                canTf[1]=true;
-                break;
-            case "swim":
-                canTf[2]=true;
-                break;
-            case "small":
-                canTf[3]=true;
-                break;
-            case "climb":
-                canTf[4]=true;
-                break;
-        }
+        sliderColor[tfNum].color = new Color(0f, 255f, 0f, 255f);
+
+        canTfPhase[tfNum] = "canTf";
     }
 
     public void TfItemGet(int getTfItemLayerNum)
@@ -192,6 +192,31 @@ public class TfControlle : MonoBehaviour
                 {
                     Debug.Log($"変身アイテムを取得、レイヤー番号は{getTfItemLayerNum}");
                     tfItemInventory.Add(getTfItemLayerNum);
+                    if(tfItemLayerNum[0]==getTfItemLayerNum)
+                    {
+                        tfTimeSlider.AddTfImage(0);
+                        sliderColor[0].color = new Color(0f, 255f, 0f, 255f);
+                    }
+                    else if(tfItemLayerNum[1]==getTfItemLayerNum)
+                    {
+                        tfTimeSlider.AddTfImage(1);
+                        sliderColor[1].color = new Color(0f, 255f, 0f, 255f);
+                    }
+                    else if(tfItemLayerNum[2]==getTfItemLayerNum)
+                    {
+                        tfTimeSlider.AddTfImage(2);
+                        sliderColor[2].color = new Color(0f, 255f, 0f, 255f);
+                    }
+                    else if(tfItemLayerNum[3]==getTfItemLayerNum)
+                    {
+                        tfTimeSlider.AddTfImage(3);
+                        sliderColor[3].color = new Color(0f, 255f, 0f, 255f);
+                    }
+                    else if(tfItemLayerNum[4]==getTfItemLayerNum)
+                    {
+                        tfTimeSlider.AddTfImage(4);
+                        sliderColor[4].color = new Color(0f, 255f, 0f, 255f);
+                    }  
                 }
                 break;
             }
@@ -199,6 +224,28 @@ public class TfControlle : MonoBehaviour
             {
                 Debug.Log("このアイテムのレイヤーは変身アイテムに入っていない");
             }
+        }
+    }
+
+    private void TfColorReset(string tfPhase)
+    {
+        switch(tfPhase)
+        {
+            case "dash":
+                sliderColor[0].color = new Color(175f, 175f, 175f, 255f);
+                break;
+            case "doubleJump":
+                sliderColor[1].color = new Color(175f, 175f, 175f, 255f);
+                break;
+            case "swim":
+                sliderColor[2].color = new Color(175f, 175f, 175f, 255f);
+                break;
+            case "small":
+                sliderColor[3].color = new Color(175f, 175f, 175f, 255f);
+                break;
+            case "climb":
+                sliderColor[4].color = new Color(175f, 175f, 175f, 255f);
+                break;
         }
     }
 }

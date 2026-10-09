@@ -1,9 +1,10 @@
 fileFormatVersion: 2
-guid: a2d281b00b9fe3144b1335c9c665d865
+guid: 34d83f4ffb6bf164091e1846f8546ee1
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - spriteBPrefab: {fileID: 2818319265720633463, guid: 05aabc64f6560654eaae5bc1ec2c5c1f, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

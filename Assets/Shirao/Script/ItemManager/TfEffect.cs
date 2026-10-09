@@ -6,6 +6,7 @@ public class TfEffect : MonoBehaviour
 {
     public PlayerControlle playerControlle;
     public TfControlle tfControlle;
+    public RayCastForSmall rayCastForSmall;
     public CollisionManager downCollision;
     public CollisionManager upAndSideCollision;
     public CollisionManager waterTrigger;
@@ -38,14 +39,14 @@ public class TfEffect : MonoBehaviour
             case "idle":
                 if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
                 {
-                    player.position = new Vector3(player.position.x, player.position.y+0.5f, 0f);
+                    player.position = new Vector3(player.position.x, player.position.y+rayCastForSmall.biggerDistance, 0f);
                 }
                 player.localScale = new Vector3(1, 1, 1);
                 break;
             case "dash":
                 if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
                 {
-                    player.position = new Vector3(player.position.x, player.position.y+0.5f, 0f);
+                    player.position = new Vector3(player.position.x, player.position.y+rayCastForSmall.biggerDistance, 0f);
                 }
                 player.localScale = new Vector3(1, 1, 1);
                 if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
@@ -65,7 +66,7 @@ public class TfEffect : MonoBehaviour
             case "doubleJump":
                 if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
                 {
-                    player.position = new Vector3(player.position.x, player.position.y+0.5f, 0f);
+                    player.position = new Vector3(player.position.x, player.position.y+rayCastForSmall.biggerDistance, 0f);
                 }
                 player.localScale = new Vector3(1, 1, 1);
                 if(downCollision.triggerPhase=="stage")
@@ -85,7 +86,7 @@ public class TfEffect : MonoBehaviour
             case "swim":
                 if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
                 {
-                    player.position = new Vector3(player.position.x, player.position.y+0.5f, 0f);
+                    player.position = new Vector3(player.position.x, player.position.y+rayCastForSmall.biggerDistance, 0f);
                 }
                 player.localScale = new Vector3(1, 1, 1);
                 if((waterTrigger.triggerPhase=="water"))
@@ -134,6 +135,13 @@ public class TfEffect : MonoBehaviour
                 break;
             case "small":
                 player.localScale = new Vector3(scale, scale, scale);
+                break;
+            case "climb":
+                if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
+                {
+                    player.position = new Vector3(player.position.x, player.position.y+rayCastForSmall.biggerDistance, 0f);
+                }
+                player.localScale = new Vector3(1, 1, 1);
                 break;
         }
     }

@@ -10,8 +10,8 @@ public class BulletAttack : MonoBehaviour
     [SerializeField] private float bulletCreateTime;
     public string bulletPhase;
     [SerializeField] private float distance;
-    [SerializeField] private int enemyLayerNum;
-    [SerializeField] private int stageLayerNum;
+    // [SerializeField] private int enemyLayerNum;
+    // [SerializeField] private int stageLayerNum;
     private string playerDirection;
     private Rigidbody2D rb;
     private GameObject cloneBullet;
@@ -29,14 +29,23 @@ public class BulletAttack : MonoBehaviour
         {
             if(JudgeAttack())
             {
-                int layerNum = hit.collider.gameObject.layer;
+                //int layerNum = hit.collider.gameObject.layer;
 
-                if(layerNum==enemyLayerNum)
+                // if(layerNum==enemyLayerNum)
+                // {
+                //     Destroy(hit.collider.gameObject);
+                //     cloneBullet.SetActive(false);
+                // }
+                // else if(layerNum==stageLayerNum)
+                // {
+                //     cloneBullet.SetActive(false);
+                // }
+                if(hit.collider.gameObject.CompareTag("Enemy"))
                 {
                     Destroy(hit.collider.gameObject);
                     cloneBullet.SetActive(false);
                 }
-                else if(layerNum==stageLayerNum)
+                else if(hit.collider.gameObject.CompareTag("Stage"))
                 {
                     cloneBullet.SetActive(false);
                 }

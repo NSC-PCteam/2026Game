@@ -86955,6 +86955,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3191275769773206641, guid: 96a093b55e284f844b146796563a0345, type: 3}
+      propertyPath: nextSceneName
+      value: 2026GameIshikawa
+      objectReference: {fileID: 0}
     - target: {fileID: 4826820547501510584, guid: 96a093b55e284f844b146796563a0345, type: 3}
       propertyPath: m_Name
       value: UISystem
@@ -133693,6 +133697,10 @@ PrefabInstance:
       propertyPath: invincibleTime
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4815067600338034709, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
+      propertyPath: gameOverManager
+      value: 
+      objectReference: {fileID: 999411565}
     - target: {fileID: 4815067600338034709, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: upAndSideCollision
       value: 

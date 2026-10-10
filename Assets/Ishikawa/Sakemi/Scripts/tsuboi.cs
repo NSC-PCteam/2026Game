@@ -15,7 +15,7 @@ public class tsuboi : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (timer >=0.05f)
+        if (timer >=0.15f)
         {
             GameObject clone = Instantiate(spriteBPrefab, transform.position, Quaternion.identity);
 

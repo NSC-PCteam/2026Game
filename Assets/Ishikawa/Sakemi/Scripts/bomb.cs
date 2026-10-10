@@ -5,6 +5,7 @@ public class ProjectileLauncher : MonoBehaviour
 {
     [SerializeField] private float speed = 20f;
     [SerializeField] public float angle = 60f;
+    [SerializeField] private GameObject prefabB;
 
     private float timer = 0f;
     private Rigidbody2D rb;
@@ -41,6 +42,11 @@ public class ProjectileLauncher : MonoBehaviour
 
         if (timer >= 5f || isGrounded)
         {
+            Instantiate(
+                prefabB,
+                transform.position + new Vector3(0f, 0f, 0f),
+                Quaternion.identity
+            );
             Destroy(gameObject);
         }
     }

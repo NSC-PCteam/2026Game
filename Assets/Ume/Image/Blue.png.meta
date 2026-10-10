@@ -1,5 +1,12 @@
 fileFormatVersion: 2
-guid: 95a29dcae8c149749ba8716391dd02ac
+guid: 413986c4a668c374d8de72a47621b531
+AssetOrigin:
+  serializedVersion: 1
+  productId: 155360
+  packageName: Pixel Adventure 1
+  packageVersion: 1.0
+  assetPath: Assets/Pixel Adventure 1/Assets/Terrain/Terrain (16x16) 1.png
+  uploadId: 332803
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

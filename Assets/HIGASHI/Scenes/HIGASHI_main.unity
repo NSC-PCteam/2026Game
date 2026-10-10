@@ -42572,6 +42572,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4815067600338034709, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
+      propertyPath: gameOverManager
+      value: 
+      objectReference: {fileID: 1801078043}
+    - target: {fileID: 4815067600338034709, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: upAndSideCollision
       value: 
       objectReference: {fileID: 1173265411}
@@ -46503,6 +46507,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96a093b55e284f844b146796563a0345, type: 3}
+--- !u!114 &1801078043 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2225746939959281704, guid: 96a093b55e284f844b146796563a0345, type: 3}
+  m_PrefabInstance: {fileID: 1801078042}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5716c5892b5851d44ad36c0b0d171a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameOverManager
 --- !u!1 &1825336762
 GameObject:
   m_ObjectHideFlags: 0
@@ -46764,6 +46779,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3816811090900200189, guid: 861fa9ff6e059ea4e8d06f07bce29642, type: 3}
+      propertyPath: gameOverManager
+      value: 
+      objectReference: {fileID: 1801078043}
     - target: {fileID: 8307719292707364245, guid: 861fa9ff6e059ea4e8d06f07bce29642, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.01

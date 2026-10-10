@@ -25,6 +25,10 @@ public class PlayerControlle : MonoBehaviour
     private Vector2 waterVelocity;
     [SerializeField] private bool isInvencible;
 
+    //ゲームオーバー処理
+    [Header("ゲームオーバー設定")]
+    [SerializeField] private GameOverManager gameOverManager; // ゲームオーバー管理スクリプトの参照
+
     void Start()
     {
         tfControlle.tfPhase = "idle";
@@ -126,6 +130,10 @@ public class PlayerControlle : MonoBehaviour
         {
             lifePoint=0;
             Debug.Log("game is over");
+            if(gameOverManager != null)
+            {
+                gameOverManager.TriggerGameOver();
+            }
         }
         else if((upAndSideCollision.triggerPhase=="damaged" && !isInvencible && supportItemEffect.invenciblePhase!="invencible"))
         {
@@ -136,6 +144,10 @@ public class PlayerControlle : MonoBehaviour
             {
                 lifePoint=0;
                 Debug.Log("game is over");
+                if(gameOverManager != null)
+                {
+                    gameOverManager.TriggerGameOver();
+                }
             }
         }
 

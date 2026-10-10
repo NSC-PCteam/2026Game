@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
+
 //using System.Numerics;
 using UnityEngine;
 
@@ -200,9 +202,11 @@ public class TfEffect : MonoBehaviour
 
     private IEnumerator Smaller()
     {
+        Debug.Log("Smaller");
         float timer =0f;
         while(timer<smallTime)
         {
+            Debug.Log("small");
             timer += Time.deltaTime;
             float t =Mathf.Clamp01(timer/smallTime);
             player.localScale = Vector3.Lerp(normalScale, smallScale, t);

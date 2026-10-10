@@ -22,8 +22,10 @@ public class GoalTrigger : MonoBehaviour
     // 2Dゲームの場合
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.tag);
         if (!hasTriggered && collision.CompareTag(targetTag))
         {
+            Debug.Log("ゴール判定");
             ClearGoal();
         }
     }

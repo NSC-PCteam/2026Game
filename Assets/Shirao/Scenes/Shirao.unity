@@ -7276,6 +7276,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1631656734 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2173423267329874190, guid: 861fa9ff6e059ea4e8d06f07bce29642, type: 3}
+  m_PrefabInstance: {fileID: 6599784421326447750}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8557cec1bf631c4fa51425a99e00d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1767770224
 GameObject:
   m_ObjectHideFlags: 0
@@ -8546,6 +8557,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1441894946}
     - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
+      propertyPath: smallTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
+      propertyPath: smallScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
+      propertyPath: smallScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
+      propertyPath: smallScale.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: waterTrigger
       value: 
       objectReference: {fileID: 1939171894}
@@ -8553,6 +8580,18 @@ PrefabInstance:
       propertyPath: downCollision
       value: 
       objectReference: {fileID: 833256235}
+    - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
+      propertyPath: normalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
+      propertyPath: normalScale.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
+      propertyPath: normalScale.z
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: upAndSideCollision
       value: 
@@ -8637,6 +8676,10 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 1441894943}
+    - target: {fileID: 4815067600338034709, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
+      propertyPath: embedTrigger
+      value: 
+      objectReference: {fileID: 1631656734}
     - target: {fileID: 4815067600338034709, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: waterTrigger
       value: 

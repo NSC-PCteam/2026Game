@@ -34371,6 +34371,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1316751008}
     - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
+      propertyPath: dashPhase
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: smallTime
       value: 2
       objectReference: {fileID: 0}
@@ -34409,6 +34413,10 @@ PrefabInstance:
     - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: normalScale.z
       value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
+      propertyPath: playerDirection
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: upAndSideCollision

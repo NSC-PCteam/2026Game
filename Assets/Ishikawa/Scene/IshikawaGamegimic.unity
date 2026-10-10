@@ -796,8 +796,9 @@ MonoBehaviour:
   normalSprite: {fileID: 2912297781628502651, guid: 351495a213edb6e4db70c3358bdae7b3, type: 3}
   crackSprite: {fileID: -5513050994037168576, guid: 439d50c759330c349adfa1dc2de8cb5c, type: 3}
   breakSprite: {fileID: 4483504832982471387, guid: 9898c3bedff56484682e8f22dba9cf0e, type: 3}
-  crackTime: 0.5
-  breakTime: 1
+  crackTime: 1
+  breakTime: 2
+  destroyTime: 3
 --- !u!1 &1210732614
 GameObject:
   m_ObjectHideFlags: 0

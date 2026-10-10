@@ -4548,7 +4548,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -46460,7 +46460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3191275769773206641, guid: 96a093b55e284f844b146796563a0345, type: 3}
       propertyPath: nextSceneName
-      value: Ume_StartScene
+      value: SmallWorld
       objectReference: {fileID: 0}
     - target: {fileID: 4826820547501510584, guid: 96a093b55e284f844b146796563a0345, type: 3}
       propertyPath: m_Name

@@ -302,6 +302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8307719292707364245}
   - component: {fileID: 6222221453634423914}
+  - component: {fileID: 3816811090900200189}
   - component: {fileID: 2687120041260939193}
   m_Layer: 7
   m_Name: Player
@@ -389,6 +390,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &3816811090900200189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3344473944015557887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27618a41ba520f345a193c24efecc61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FallDetector
+  fallThresholdY: -10
+  gameOverManager: {fileID: 0}
 --- !u!50 &2687120041260939193
 Rigidbody2D:
   serializedVersion: 5

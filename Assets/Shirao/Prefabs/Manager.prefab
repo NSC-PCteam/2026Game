@@ -440,8 +440,8 @@ MonoBehaviour:
   swimFloatSpeed: 0
   swimWaterAcceleration: 2
   swimWaterDeceleration: 2
-  normalScale: {x: 0, y: 0, z: 0}
-  smallScale: {x: 0, y: 0, z: 0}
+  normalScale: {x: 0.9, y: 0.9, z: 0.9}
+  smallScale: {x: 0.4, y: 0.4, z: 0.4}
   smallTime: 0
 --- !u!1 &7230470468995913691
 GameObject:

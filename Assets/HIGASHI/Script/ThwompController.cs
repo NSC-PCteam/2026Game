@@ -102,6 +102,8 @@ public class ThwompController : MonoBehaviour
         bool playerIsBelow =
             player.position.y < transform.position.y;
 
+            Debug.Log($"playerposition={player.position}, transform.position={transform.position}");
+
         if (horizontalDistance <= detectionDistance &&
             playerIsBelow)
         {

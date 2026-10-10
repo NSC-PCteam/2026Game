@@ -31,11 +31,13 @@ public class TfEffect : MonoBehaviour
     [SerializeField] private float smallTime;
     private bool notDoubleJumped=true;
     private Vector2 swimVelocity;
+    [SerializeField] private string scalePhase;
 
     //初期ダッシュ状態
     void Start()
     {
         dashPhase="notDash";
+        scalePhase="learger";
     }
 
     //変身効果処理
@@ -44,18 +46,16 @@ public class TfEffect : MonoBehaviour
         switch(tfControlle.tfPhase)
         {
             case "idle":
-                if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
+                if(scalePhase=="smaller")
                 {
                     StartCoroutine(Learger());
                 }
-                //player.localScale = new Vector3(1, 1, 1);
                 break;
             case "dash":
-                if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
+                if(scalePhase=="smaller")
                 {
                     StartCoroutine(Learger());
                 }
-                player.localScale = new Vector3(1, 1, 1);
                 if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
                 {
                     playerDirection="right";
@@ -71,11 +71,10 @@ public class TfEffect : MonoBehaviour
                 }
                 break;
             case "doubleJump":
-                if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
+                if(scalePhase=="smaller")
                 {
                     StartCoroutine(Learger());
                 }
-                player.localScale = new Vector3(1, 1, 1);
                 if(downCollision.triggerPhase=="stage")
                 {
                     notDoubleJumped=true;
@@ -91,11 +90,10 @@ public class TfEffect : MonoBehaviour
                 }
                 break;
             case "swim":
-                if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
+                if(scalePhase=="smaller")
                 {
                     StartCoroutine(Learger());
                 }
-                player.localScale = new Vector3(1, 1, 1);
                 if((waterTrigger.triggerPhase=="water"))
                 {
                     Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -141,14 +139,16 @@ public class TfEffect : MonoBehaviour
                 }
                 break;
             case "small":
-                StartCoroutine(Smaller());
+                if(scalePhase=="learger")
+                {
+                    StartCoroutine(Smaller());
+                }
                 break;
             case "climb":
-                if(player.localScale.x!=1 && player.localScale.y!=1 && player.localScale.z!=1)
+                if(scalePhase=="smaller")
                 {
                     StartCoroutine(Learger());
                 }
-                player.localScale = new Vector3(1, 1, 1);
                 break;
         }
     }
@@ -164,6 +164,7 @@ public class TfEffect : MonoBehaviour
             playerControlle.rb.AddForce(Vector2.up*upDashForce);
             while(time<dashTime)
             {
+                //playerControlle.rb.AddForce(Vector2.up*50);
                 playerControlle.rb.AddForce(Vector2.right * dashForce);
                 time += Time.fixedDeltaTime;
                 yield return new WaitForFixedUpdate();
@@ -174,7 +175,7 @@ public class TfEffect : MonoBehaviour
             playerControlle.rb.AddForce(Vector2.up*upDashForce);
             while(time<dashTime)
             {
-                playerControlle.rb.AddForce(Vector2.up*50);
+                //playerControlle.rb.AddForce(Vector2.up*50);
                 playerControlle.rb.AddForce(Vector2.left * dashForce);
                 time += Time.fixedDeltaTime;
                 yield return new WaitForFixedUpdate();
@@ -187,21 +188,26 @@ public class TfEffect : MonoBehaviour
 
     private IEnumerator Learger()
     {
+        scalePhase="learger";
         float timer = 0f;
-        if(player.localScale!=normalScale)
-        {
+            Debug.Log("巨大化中");
+            
+            
             while(timer<smallTime)
             {
                 timer += Time.deltaTime;
+                Debug.Log($"Time.deltaTime={Time.deltaTime}");
+                Debug.Log($"timer={timer}, smallTime={smallTime}");
                 float t = Mathf.Clamp01(timer/smallTime);
                 player.localScale = Vector3.Lerp(smallScale, normalScale, t);
                 yield return null;
             }
-        }
+            player.localScale=normalScale;
     }
 
     private IEnumerator Smaller()
     {
+        scalePhase="smaller";
         // Debug.Log("Smaller");
         float timer =0f;
         // Debug.Log(timer,smallTime);
@@ -213,6 +219,7 @@ public class TfEffect : MonoBehaviour
             player.localScale = Vector3.Lerp(normalScale, smallScale, t);
             yield return null;
         }
+        player.localScale=smallScale;
     }
 
     // private IEnumerator Swim()

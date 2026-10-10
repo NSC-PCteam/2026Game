@@ -6,9 +6,9 @@ public class SupportItemEffect : MonoBehaviour
 {
     public TfControlle tfControlle;
     public PlayerControlle playerControlle;
-    public string invinciblePhase;
-    public List<int> supportItemLayerNum;
-    [SerializeField] private float invincibleTime;
+    public string invenciblePhase;
+    //public List<int> supportItemLayerNum;
+    [SerializeField] private float invencibleTime;
     [SerializeField] private float tfPlusTime;
     [SerializeField] private float tfPulsTimeTime;
     [SerializeField] private int healPoint;
@@ -16,33 +16,35 @@ public class SupportItemEffect : MonoBehaviour
 
     void Start()
     {
-        invinciblePhase="idle";
+        invenciblePhase="idle";
     }
 
-    void Update()
-    {
+    // void Update()
+    // {
         
-    }
+    // }
 
     //補助アイテム　無敵　変身時間増加　回復　残機増加
-    public IEnumerator SupportEffect(int supportItemNum)
+    public IEnumerator SupportEffect(string supportItemName)
     {
-        switch(supportItemNum)
+        //Debug.Log($"supportItemName={supportItemName}");
+        switch(supportItemName)
         {
-            case 15:
-                invinciblePhase="invincible";
-                yield return new WaitForSeconds(invincibleTime);
-                invinciblePhase="idle";
-                break;
-            case 16:
+            case "TfTime":
                 tfControlle.tfTime+=tfPlusTime;
                 yield return new WaitForSeconds(tfPulsTimeTime);
                 tfControlle.tfTime-=tfPlusTime;
                 break;
-            case 17:
+            case "Invencible":
+                //Debug.Log("無敵中");
+                invenciblePhase="invencible";
+                yield return new WaitForSeconds(invencibleTime);
+                invenciblePhase="idle";
+                break;
+            case "Life":
                 playerControlle.lifePoint+=lifePoint;
                 break;
-            case 18:
+            case "Heal":
                 break;
             
         }

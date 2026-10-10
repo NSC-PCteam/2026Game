@@ -7,13 +7,13 @@ public class CollisionManager : MonoBehaviour
     // public TfControlle tfControlle;
     // public SupportItemEffect supportItemEffect;
     public string triggerPhase;
-    [SerializeField] private int stageLayerNum;
-    [SerializeField] private int enemyLayerNum;
-    [SerializeField] private int waterLayerNum;
+    // [SerializeField] private int stageLayerNum;
+    // [SerializeField] private int enemyLayerNum;
+    // [SerializeField] private int waterLayerNum;
     public GameObject stepOnEnemy;
     public GameObject item;
     //public GameObject supportItem;
-    public int getItemLayerNum;
+    //public int getItemLayerNum;
     //public int getSupportItemLayerNum;
     
 
@@ -24,11 +24,16 @@ public class CollisionManager : MonoBehaviour
 
     public void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.layer==waterLayerNum)
+        if(collision.gameObject.CompareTag("Stage"))
+        {
+            triggerPhase="Stage";
+        }
+        else if(collision.gameObject.CompareTag("Water"))
         {
             triggerPhase="water";
         }
     }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -37,7 +42,7 @@ public class CollisionManager : MonoBehaviour
 
     public void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.layer==enemyLayerNum)
+        if(collision.gameObject.CompareTag("Enemy"))
         {
             foreach (ContactPoint2D contact in collision.contacts)
             {
@@ -56,63 +61,78 @@ public class CollisionManager : MonoBehaviour
                 }
             }
         }
-        else if(collision.gameObject.layer==stageLayerNum)
+        else if(collision.gameObject.CompareTag("Stage"))
         {
+            bool isGrounded = false;
+            bool isRightWall = false;
+            bool isLeftWall = false;
             foreach (ContactPoint2D contact in collision.contacts)
             {
                 Vector2 normal=contact.normal;
-                //Debug.Log($"noraml.x={normal.x}, normal.y={normal.y}");
+                Debug.Log($"noraml.x={normal.x}, normal.y={normal.y}");
 
-                if(normal.x>0.5f)
+                if(normal.y>0.5f)
                 {
-                    triggerPhase="leftWall";
-                    if(normal.y>0.5f)
-                    {
-                        triggerPhase="groundAndLeftWall";
-                    }
-                    break;
+                    isGrounded=true;
                 }
-                else if(normal.x<-0.5f)
+                else if(normal.x>0.5f)
                 {
-                    triggerPhase="rightWall";
-                    if(normal.y>0.5f)
-                    {
-                        triggerPhase="groundAndRightWall";
-                    }
-                    break;
+                    isLeftWall = true;
                 }
-                else
+                else if (normal.x<-0.5f)
                 {
-                    triggerPhase="stage";
+                    isRightWall=true;
                 }
+                // if((normal.x<0.5f && normal.y>0.5f) || (normal.x>-0.5f && normal.y>0.5f))
+                // {
+                //     triggerPhase="stage";
+                //     break;
+                // }
+                // if(normal.x>0.5f)
+                // {
+                //     triggerPhase="leftWall";
+                //     if(normal.y>0.5f)
+                //     {
+                //         triggerPhase="groundAndLeftWall";
+                //     }
+                //     break;
+                // }
+                // else if(normal.x<-0.5f)
+                // {
+                //     triggerPhase="rightWall";
+                //     if(normal.y>0.5f)
+                //     {
+                //         triggerPhase="groundAndRightWall";
+                //     }
+                //     break;
+                // }
+            }
+            if (isGrounded && isLeftWall)
+            {
+                triggerPhase = "groundAndLeftWall";
+            }
+            else if (isGrounded && isRightWall)
+            {
+                triggerPhase = "groundAndRightWall";
+            }
+            else if (isGrounded)
+            {
+                triggerPhase = "stage";
+            }
+            else if (isLeftWall)
+            {
+                triggerPhase = "leftWall";
+            }
+            else if (isRightWall)
+            {
+                triggerPhase = "rightWall";
             }
         }
         else
         {
-            getItemLayerNum=collision.gameObject.layer;
+            //getItemLayerNum=collision.gameObject.layer;
             item=collision.gameObject;
             triggerPhase="item";
-            // foreach(int tfItemNum in tfControlle.tfItemLayerNum)
-            // {
-            //     if(collision.gameObject.layer==tfItemNum)
-            //     {
-            //         getTfItemLayerNum=tfItemNum;
-            //         tfItem=collision.gameObject;
-                    
-            //         break;
-            //     }
-            // }
-
-            // foreach(int supportItemLayerNum in supportItemEffect.supportItemLayerNum)
-            // {
-            //     if(collision.gameObject.layer==supportItemLayerNum)
-            //     {
-            //         getSupportItemLayerNum=supportItemLayerNum;
-            //         supportItem=collision.gameObject;
-            //         triggerPhase="supportItem";
-            //         break;
-            //     }
-            // }
         }
     }
 

@@ -12,8 +12,8 @@ public class TfControlle : MonoBehaviour
     public string tfPhase;
     public List<Slider> tfSlider;
     public List<Image> sliderColor;
-    public List<int> tfItemLayerNum;
-    public List<int> tfItemInventory;
+    public List<string> tfItemName;
+    public List<string> tfItemInventory;
     public List<float> usingTfTime = new List<float>(){0f, 0f, 0f, 0f, 0f, 0f};
     public List<string> canTfPhase = new List<string>(){"canTf", "canTf", "canTf", "canTf", "canTf", "canTf"};
 
@@ -43,7 +43,7 @@ public class TfControlle : MonoBehaviour
     //変身操作処理
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.KeypadPlus))
+        if(Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.Alpha0))
         {
             if(tfTimeSlider.tfCanvas.activeSelf)
             {
@@ -54,21 +54,18 @@ public class TfControlle : MonoBehaviour
                 tfTimeSlider.tfCanvas.SetActive(true);
             }
         }
-        // if(Input.GetKeyUp(KeyCode.KeypadPlus))
-        // {
-        //     tfTimeSlider.tfCanvas.SetActive(false);
-        // }
 
-        if(Input.GetKeyDown(KeyCode.Keypad5))
+
+        if(Input.GetKeyDown(KeyCode.Keypad5) || Input.GetKeyDown(KeyCode.Alpha1))
         {
             TfColorReset(tfPhase);
             tfPhase = "idle";
         }
-        else if(Input.GetKeyDown(KeyCode.Keypad7))
+        else if(Input.GetKeyDown(KeyCode.Keypad7) || Input.GetKeyDown(KeyCode.Alpha2))
         {
-            foreach(int tfItemInventoryNum in tfItemInventory)
+            foreach(string tfItemInventoryName in tfItemInventory)
             {
-                if(tfItemInventoryNum==tfItemLayerNum[0])
+                if(tfItemInventoryName==tfItemName[0])
                 {
                     if(canTfPhase[0]=="canTf")
                     {
@@ -79,11 +76,11 @@ public class TfControlle : MonoBehaviour
                 }
             }
         }
-        else if(Input.GetKeyDown(KeyCode.Keypad8))
+        else if(Input.GetKeyDown(KeyCode.Keypad8) || Input.GetKeyDown(KeyCode.Alpha3))
         {
-            foreach(int tfItemInventoryNum in tfItemInventory)
+            foreach(string tfItemInventoryName in tfItemInventory)
             {
-                if(tfItemInventoryNum==tfItemLayerNum[1])
+                if(tfItemInventoryName==tfItemName[1])
                 {
                     if(canTfPhase[1]=="canTf")
                     {
@@ -94,11 +91,11 @@ public class TfControlle : MonoBehaviour
                 }
             }
         }
-        else if(Input.GetKeyDown(KeyCode.Keypad9))
+        else if(Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha4))
         {
-            foreach(int tfItemInventoryNum in tfItemInventory)
+            foreach(string tfItemInventoryName in tfItemInventory)
             {
-                if(tfItemInventoryNum==tfItemLayerNum[2])
+                if(tfItemInventoryName==tfItemName[2])
                 {
                     if(canTfPhase[2]=="canTf")
                     {
@@ -109,11 +106,11 @@ public class TfControlle : MonoBehaviour
                 }
             }
         }
-        else if(Input.GetKeyDown(KeyCode.Keypad4))
+        else if(Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.Alpha5))
         {
-            foreach(int tfItemInventoryNum in tfItemInventory)
+            foreach(string tfItemInventoryName in tfItemInventory)
             {
-                if(tfItemInventoryNum==tfItemLayerNum[3])
+                if(tfItemInventoryName==tfItemName[3])
                 {
                     if(canTfPhase[3]=="canTf")
                     {
@@ -124,11 +121,11 @@ public class TfControlle : MonoBehaviour
                 }
             }
         }
-        else if(Input.GetKeyDown(KeyCode.Keypad6))
+        else if(Input.GetKeyDown(KeyCode.Keypad6) || Input.GetKeyDown(KeyCode.Alpha6))
         {
-            foreach(int tfItemInventoryNum in tfItemInventory)
+            foreach(string tfItemInventoryName in tfItemInventory)
             {
-                if(tfItemInventoryNum==tfItemLayerNum[4])
+                if(tfItemInventoryName==tfItemName[4])
                 {
                     if(canTfPhase[4]=="canTf")
                     {
@@ -169,18 +166,17 @@ public class TfControlle : MonoBehaviour
         canTfPhase[tfNum] = "canTf";
     }
 
-    public void TfItemGet(int getTfItemLayerNum)
+    public void TfItemGet(string getItemName)
     {
-        Debug.Log($"getTfItemLayerNum={getTfItemLayerNum}");
-        foreach(int tfItemNum in tfItemLayerNum)
+        //Debug.Log($"getItemName={getItemName}");
+        foreach(string tfName in tfItemName)
         {
-            Debug.Log($"tfItemNum={tfItemNum}");
-            if(tfItemNum==getTfItemLayerNum)
+            if(tfName==getItemName)
             {
                 bool isGetItem=false;
-                foreach(int tfItemInventoryNum in tfItemInventory)
+                foreach(string tfItemInventoryName in tfItemInventory)
                 {
-                    if(tfItemInventoryNum==tfItemNum)
+                    if(tfItemInventoryName==tfName)
                     {
                         Debug.Log("この変身アイテムは取得済み");
                         isGetItem=true;
@@ -190,33 +186,17 @@ public class TfControlle : MonoBehaviour
 
                 if(!isGetItem)
                 {
-                    Debug.Log($"変身アイテムを取得、レイヤー番号は{getTfItemLayerNum}");
-                    tfItemInventory.Add(getTfItemLayerNum);
-                    if(tfItemLayerNum[0]==getTfItemLayerNum)
+                    //Debug.Log($"変身アイテムを取得、レイヤー番号は{getItemName}");
+                    tfItemInventory.Add(getItemName);
+
+                    for(int i=0; i<tfItemName.Count; i++)
                     {
-                        tfTimeSlider.AddTfImage(0);
-                        sliderColor[0].color = new Color(0f, 255f, 0f, 255f);
+                        if(tfItemName[i]==getItemName)
+                        {
+                            tfTimeSlider.AddTfImage(i);
+                            sliderColor[i].color = new Color(0f, 255f, 0f, 255f);
+                        }
                     }
-                    else if(tfItemLayerNum[1]==getTfItemLayerNum)
-                    {
-                        tfTimeSlider.AddTfImage(1);
-                        sliderColor[1].color = new Color(0f, 255f, 0f, 255f);
-                    }
-                    else if(tfItemLayerNum[2]==getTfItemLayerNum)
-                    {
-                        tfTimeSlider.AddTfImage(2);
-                        sliderColor[2].color = new Color(0f, 255f, 0f, 255f);
-                    }
-                    else if(tfItemLayerNum[3]==getTfItemLayerNum)
-                    {
-                        tfTimeSlider.AddTfImage(3);
-                        sliderColor[3].color = new Color(0f, 255f, 0f, 255f);
-                    }
-                    else if(tfItemLayerNum[4]==getTfItemLayerNum)
-                    {
-                        tfTimeSlider.AddTfImage(4);
-                        sliderColor[4].color = new Color(0f, 255f, 0f, 255f);
-                    }  
                 }
                 break;
             }

@@ -8562,15 +8562,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: smallScale.x
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: smallScale.y
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: smallScale.z
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: waterTrigger
@@ -8582,15 +8582,15 @@ PrefabInstance:
       objectReference: {fileID: 833256235}
     - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: normalScale.x
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: normalScale.y
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: normalScale.z
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 2076788988861924319, guid: 1ffaa2e76b8e8474498c44c0f2444132, type: 3}
       propertyPath: upAndSideCollision

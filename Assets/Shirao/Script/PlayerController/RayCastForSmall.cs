@@ -15,7 +15,7 @@ public class RayCastForSmall : MonoBehaviour
         if (upHit.collider != null)
         {
             //Debug.Log("Hit: " + upHit.collider.name);
-            if(upHit.collider.CompareTag("Ground"))
+            if(upHit.collider.CompareTag("Stage"))
             {
                 upDistance = upHit.distance;
                 //Debug.Log("Player is on the ground.");
@@ -25,7 +25,7 @@ public class RayCastForSmall : MonoBehaviour
         if(downHit.collider != null)
         {
             //Debug.Log("Hit: " + downHit.collider.name);
-            if(downHit.collider.CompareTag("Ground"))
+            if(downHit.collider.CompareTag("Stage"))
             {
                 downDistance = downHit.distance;
                 //Debug.Log("Player is on the ground.");

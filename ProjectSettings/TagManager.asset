@@ -4,7 +4,16 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Ground
+  - Enemy
+  - Water
+  - Dash
+  - Jump
+  - Swim
+  - Small
+  - Climb
+  - TfTime
+  - Invencible
+  - Stage
   layers:
   - Default
   - TransparentFX

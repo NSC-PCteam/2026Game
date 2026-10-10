@@ -202,8 +202,9 @@ public class TfEffect : MonoBehaviour
 
     private IEnumerator Smaller()
     {
-        Debug.Log("Smaller");
+        // Debug.Log("Smaller");
         float timer =0f;
+        // Debug.Log(timer,smallTime);
         while(timer<smallTime)
         {
             Debug.Log("small");

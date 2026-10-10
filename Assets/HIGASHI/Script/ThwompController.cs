@@ -4,67 +4,101 @@ using UnityEngine;
 public class ThwompController : MonoBehaviour
 {
     [Header("プレイヤー")]
-    public Transform player;
+    [SerializeField] private Transform player;
+
+    [Header("ギミックの種類")]
+    [Tooltip("ドッスンならオン、固定トゲならオフ")]
+    [SerializeField] private bool movesLikeThwomp = true;
 
     [Header("反応範囲")]
-    public float detectionDistance = 3f;
+    [SerializeField] private float detectionDistance = 3f;
 
     [Header("落下設定")]
-    public float fallSpeed = 12f;
+    [SerializeField] private float fallSpeed = 12f;
 
-    // 落下開始から元へ戻り始めるまでの最大時間
-    public float maxFallTime = 2f;
+    [Tooltip("落下開始から元へ戻り始めるまでの最大時間")]
+    [SerializeField] private float maxFallTime = 2f;
 
-    // 最初の位置から落下できる最大距離
-    public float maxFallDistance = 8f;
+    [Tooltip("最初の位置から落下できる最大距離")]
+    [SerializeField] private float maxFallDistance = 8f;
 
     [Header("帰還設定")]
-    public float waitTime = 0.5f;
-    public float returnSpeed = 3f;
+    [SerializeField] private float waitTime = 0.5f;
 
-    Rigidbody2D rb;
-    Vector2 startPosition;
+    [SerializeField] private float returnSpeed = 3f;
 
-    bool isFalling;
-    bool isWaiting;
-    bool isReturning;
+    private Rigidbody2D rb;
+    private Vector2 startPosition;
 
-    float fallTimer;
+    private bool isFalling;
+    private bool isWaiting;
+    private bool isReturning;
+
+    private float fallTimer;
 
     void Start()
     {
+        // 固定トゲの場合、Rigidbody2Dがなくても動作する
         rb = GetComponent<Rigidbody2D>();
 
-        // 最初の位置を保存
-        startPosition = rb.position;
+        if (movesLikeThwomp)
+        {
+            if (rb == null)
+            {
+                Debug.LogError(
+                    "ドッスンとして使用する場合は、" +
+                    "Rigidbody2Dが必要です。",
+                    this
+                );
 
-        // 念のためコード側でも設定
-        rb.gravityScale = 0f;
-        rb.freezeRotation = true;
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+                enabled = false;
+                return;
+            }
 
-        rb.linearVelocity = Vector2.zero;
+            // ドッスンの最初の位置を保存
+            startPosition = rb.position;
+
+            rb.gravityScale = 0f;
+            rb.freezeRotation = true;
+            rb.collisionDetectionMode =
+                CollisionDetectionMode2D.Continuous;
+
+            rb.linearVelocity = Vector2.zero;
+        }
+
+        if (player == null)
+        {
+            Debug.LogWarning(
+                "ThwompControllerのPlayerが設定されていません。" +
+                "固定トゲの場合、落下判定には影響しません。",
+                this
+            );
+        }
     }
 
     void Update()
     {
+        // 固定トゲの場合は落下処理を行わない
+        if (!movesLikeThwomp)
+        {
+            return;
+        }
+
         if (player == null)
         {
             return;
         }
 
-        // 待機中だけプレイヤーを探す
+        // 落下中・待機中・帰還中は再反応しない
         if (isFalling || isWaiting || isReturning)
         {
             return;
         }
 
-        // プレイヤーとの横方向の距離
         float horizontalDistance = Mathf.Abs(
             player.position.x - transform.position.x
         );
 
-        // プレイヤーがドッスンより下にいるか
         bool playerIsBelow =
             player.position.y < transform.position.y;
 
@@ -77,6 +111,11 @@ public class ThwompController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!movesLikeThwomp || rb == null)
+        {
+            return;
+        }
+
         if (isFalling)
         {
             Fall();
@@ -90,6 +129,11 @@ public class ThwompController : MonoBehaviour
 
     void StartFalling()
     {
+        if (rb == null)
+        {
+            return;
+        }
+
         isFalling = true;
         fallTimer = 0f;
 
@@ -98,17 +142,13 @@ public class ThwompController : MonoBehaviour
 
     void Fall()
     {
-        // 落下時間を計測
         fallTimer += Time.fixedDeltaTime;
 
-        // 一定の速度で真下へ落下
         rb.linearVelocity = new Vector2(0f, -fallSpeed);
 
-        // 最初の位置からどれくらい落下したか
         float fallenDistance =
             startPosition.y - rb.position.y;
 
-        // 時間または距離が上限に達したら帰還準備
         if (fallTimer >= maxFallTime ||
             fallenDistance >= maxFallDistance)
         {
@@ -118,7 +158,9 @@ public class ThwompController : MonoBehaviour
 
     void BeginReturn()
     {
-        if (!isFalling)
+        if (!movesLikeThwomp ||
+            rb == null ||
+            !isFalling)
         {
             return;
         }
@@ -133,7 +175,6 @@ public class ThwompController : MonoBehaviour
 
     IEnumerator ReturnAfterDelay()
     {
-        // 落下終了地点で少し待つ
         yield return new WaitForSeconds(waitTime);
 
         isWaiting = false;
@@ -152,8 +193,10 @@ public class ThwompController : MonoBehaviour
 
         rb.MovePosition(nextPosition);
 
-        // 最初の位置へほぼ到着した
-        if (Vector2.Distance(rb.position, startPosition) <= 0.05f)
+        if (Vector2.Distance(
+                rb.position,
+                startPosition
+            ) <= 0.05f)
         {
             rb.position = startPosition;
             rb.linearVelocity = Vector2.zero;
@@ -165,20 +208,48 @@ public class ThwompController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // プレイヤーに当たった場合
-        PlayerMove playerMove =
-            collision.gameObject.GetComponent<PlayerMove>();
+        // プレイヤーまたはPlayerの子Colliderから
+        // PlayerRespawnを探す
+        PlayerRespawn playerRespawn =
+            collision.gameObject
+                .GetComponentInParent<PlayerRespawn>();
 
-        if (playerMove != null)
+        if (playerRespawn != null)
         {
-            playerMove.Respawn();
+            playerRespawn.Respawn();
+
+            // ドッスンの場合は接触後に帰還を開始
+            if (movesLikeThwomp && isFalling)
+            {
+                BeginReturn();
+            }
+
+            return;
         }
 
-        // 地面に当たった場合
-        if (collision.gameObject.CompareTag("Ground") &&
-            isFalling)
+        // ドッスンが地面に当たった場合
+        if (movesLikeThwomp &&
+            isFalling &&
+            collision.gameObject.CompareTag("Ground"))
         {
             BeginReturn();
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // トゲのColliderでIs Triggerをオンにしている場合
+        PlayerRespawn playerRespawn =
+            other.GetComponentInParent<PlayerRespawn>();
+
+        if (playerRespawn != null)
+        {
+            playerRespawn.Respawn();
+
+            if (movesLikeThwomp && isFalling)
+            {
+                BeginReturn();
+            }
         }
     }
 }

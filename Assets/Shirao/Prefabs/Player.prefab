@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9181121035761834082}
   m_Layer: 7
   m_Name: UpAndSideCollision
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 1028342193966108828}
   m_Layer: 4
   m_Name: DownCollision
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 2173423267329874190}
   m_Layer: 7
   m_Name: EmbedTrigger
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 2928392085700581877}
   m_Layer: 7
   m_Name: WaterTrigger
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -14,6 +14,8 @@ TagManager:
   - TfTime
   - Invencible
   - Stage
+  - Ground
+  - SuperEnemy
   layers:
   - Default
   - TransparentFX

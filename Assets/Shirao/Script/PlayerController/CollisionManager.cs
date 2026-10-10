@@ -61,6 +61,10 @@ public class CollisionManager : MonoBehaviour
                 }
             }
         }
+        else if(collision.gameObject.CompareTag("SuperEnemy"))
+        {
+            triggerPhase="damaged";
+        }
         else if(collision.gameObject.CompareTag("Stage"))
         {
             bool isGrounded = false;
@@ -69,7 +73,7 @@ public class CollisionManager : MonoBehaviour
             foreach (ContactPoint2D contact in collision.contacts)
             {
                 Vector2 normal=contact.normal;
-                Debug.Log($"noraml.x={normal.x}, normal.y={normal.y}");
+                //Debug.Log($"noraml.x={normal.x}, normal.y={normal.y}");
 
                 if(normal.y>0.5f)
                 {

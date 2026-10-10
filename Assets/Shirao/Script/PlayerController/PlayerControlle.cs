@@ -9,6 +9,7 @@ public class PlayerControlle : MonoBehaviour
     public CollisionManager downCollision;
     public CollisionManager upAndSideCollision;
     public CollisionManager waterTrigger;
+    public CollisionManager embedTrigger;
     public BulletAttack bulletAttack;
     public Rigidbody2D rb;
     public int lifePoint;
@@ -19,15 +20,15 @@ public class PlayerControlle : MonoBehaviour
     [SerializeField] private float waterDeceleration;
     [SerializeField] private float floatSpeed;
     [SerializeField] private float jumpSpeed;
-    [SerializeField] private float invincibleTime;
+    [SerializeField] private float invencibleTime;
     private Vector2 targetVelocity;
     private Vector2 waterVelocity;
-    [SerializeField] private bool isInvincible;
+    [SerializeField] private bool isInvencible;
 
     void Start()
     {
         tfControlle.tfPhase = "idle";
-        isInvincible=false;
+        isInvencible=false;
     }
 
     void Update()
@@ -79,7 +80,7 @@ public class PlayerControlle : MonoBehaviour
         //ジャンプ処理
         if(Input.GetKey(KeyCode.Space))
         {
-            if(downCollision.triggerPhase=="stage")
+            if(downCollision.triggerPhase=="stage" || downCollision.triggerPhase=="groundAndLeftWall" || downCollision.triggerPhase=="groundAndRightWall")
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
             }
@@ -98,27 +99,37 @@ public class PlayerControlle : MonoBehaviour
             }
         }
 
-        //攻撃処理（踏みつけ）
-        if(downCollision.triggerPhase=="stepOnEnemy")
+        //攻撃処理
+        if(supportItemEffect.invenciblePhase=="invencible")
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 1)*jumpSpeed;
-            downCollision.stepOnEnemy.SetActive(false);
+            if(downCollision.triggerPhase=="stepOnEnemy")
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 1)*jumpSpeed;
+                downCollision.stepOnEnemy.SetActive(false);
+            }
+            else if(upAndSideCollision.triggerPhase=="damaged")
+            {
+                upAndSideCollision.stepOnEnemy.SetActive(false);
+            }   
         }
-
-        //攻撃処理（無敵）
-        if(supportItemEffect.invinciblePhase=="invincible" && downCollision.triggerPhase=="stepOnEnemy")
+        else
         {
-            downCollision.stepOnEnemy.SetActive(false);
-        }
-        else if(supportItemEffect.invinciblePhase=="invincible" && upAndSideCollision.triggerPhase=="damaged")
-        {
-            upAndSideCollision.stepOnEnemy.SetActive(false);
+            if(downCollision.triggerPhase=="stepOnEnemy")
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 1)*jumpSpeed;
+                downCollision.stepOnEnemy.SetActive(false);
+            }    
         }
 
         //被攻撃処理
-        if((upAndSideCollision.triggerPhase=="damaged" && !isInvincible && supportItemEffect.invinciblePhase!="invincible"))
+        if(embedTrigger.triggerPhase=="Stage")
         {
-            StartCoroutine(InvincibleTime());
+            lifePoint=0;
+            Debug.Log("game is over");
+        }
+        else if((upAndSideCollision.triggerPhase=="damaged" && !isInvencible && supportItemEffect.invenciblePhase!="invencible"))
+        {
+            StartCoroutine(InvencibleTime());
             Debug.Log("U a damaged by enemy");
             lifePoint--;
             if(lifePoint<=0)
@@ -131,48 +142,99 @@ public class PlayerControlle : MonoBehaviour
         //アイテム取得処理
         if(upAndSideCollision.triggerPhase=="item")
         {
-            foreach(int itemNum in tfControlle.tfItemLayerNum)
+            //Debug.Log($"upAndSideCollision.item.tag={upAndSideCollision.item.tag}");
+            switch(upAndSideCollision.item.tag)
             {
-                if(upAndSideCollision.getItemLayerNum==itemNum)
-                {
-                    upAndSideCollision.item.SetActive(false);
-                    tfControlle.TfItemGet(itemNum);
+                case "Dash":
+                    tfControlle.TfItemGet("Dash");
                     break;
-                }
-            }
-
-            foreach(int itemNum in supportItemEffect.supportItemLayerNum)
-            {
-                if(upAndSideCollision.getItemLayerNum==itemNum)
-                {
-                    upAndSideCollision.item.SetActive(false);
-                    StartCoroutine(supportItemEffect.SupportEffect(itemNum));
+                case "Jump":
+                    tfControlle.TfItemGet("Jump");
                     break;
-                }
+                case "Swim":
+                    tfControlle.TfItemGet("Swim");
+                    break;
+                case "Small":
+                    tfControlle.TfItemGet("Small");
+                    break;
+                case "Climb":
+                    tfControlle.TfItemGet("Climb");
+                    break;
+                case "TfTime":
+                    StartCoroutine(supportItemEffect.SupportEffect("TfTime"));
+                    break;
+                case "Invencible":
+                    StartCoroutine(supportItemEffect.SupportEffect("Invencible"));
+                    break;
             }
+            upAndSideCollision.item.SetActive(false);
         }
+            // foreach(int itemNum in tfControlle.tfItemLayerNum)
+            // {
+            //     if(upAndSideCollision.getItemLayerNum==itemNum)
+            //     {
+                    
+                    
+            //         break;
+            //     }
+            // }
+
+            // foreach(int itemNum in supportItemEffect.supportItemLayerNum)
+            // {
+            //     if(upAndSideCollision.getItemLayerNum==itemNum)
+            //     {
+            //         upAndSideCollision.item.SetActive(false);
+                
+            //         break;
+            //     }
+            // }
         else if(downCollision.triggerPhase=="item")
         {
-            foreach(int itemNum in tfControlle.tfItemLayerNum)
+            switch(downCollision.item.tag)
             {
-                if(downCollision.getItemLayerNum==itemNum)
-                {
-                    downCollision.item.SetActive(false);
-                    tfControlle.TfItemGet(itemNum);
+                case "Dash":
+                    tfControlle.TfItemGet("Dash");
                     break;
-                }
+                case "Jump":
+                    tfControlle.TfItemGet("Jump");
+                    break;
+                case "Swim":
+                    tfControlle.TfItemGet("Swim");
+                    break;
+                case "Small":
+                    tfControlle.TfItemGet("Small");
+                    break;
+                case "Climb":
+                    tfControlle.TfItemGet("Climb");
+                    break;
+                case "TfTime":
+                    StartCoroutine(supportItemEffect.SupportEffect("TfTime"));
+                    break;
+                case "Invencible":
+                    StartCoroutine(supportItemEffect.SupportEffect("Invencible"));
+                    break;
             }
+            downCollision.item.SetActive(false);
+            // foreach(int itemNum in tfControlle.tfItemLayerNum)
+            // {
+            //     if(downCollision.getItemLayerNum==itemNum)
+            //     {
+            //         downCollision.item.SetActive(false);
+            //         tfControlle.TfItemGet(itemNum);
+            //         break;
+            //     }
+            // }
 
-            foreach(int itemNum in supportItemEffect.supportItemLayerNum)
-            {
-                Debug.Log($"downCollision.getItemLayerNum={downCollision.getItemLayerNum}");
-                if(downCollision.getItemLayerNum==itemNum)
-                {
-                    downCollision.item.SetActive(false);
-                    StartCoroutine(supportItemEffect.SupportEffect(itemNum));
-                    break;
-                }
-            }
+            // foreach(int itemNum in supportItemEffect.supportItemLayerNum)
+            // {
+            //     Debug.Log($"downCollision.getItemLayerNum={downCollision.getItemLayerNum}");
+            //     if(downCollision.getItemLayerNum==itemNum)
+            //     {
+            //         downCollision.item.SetActive(false);
+            //         StartCoroutine(supportItemEffect.SupportEffect(itemNum));
+            //         break;
+            //     }
+            // }
         }
 
         //壁引っかかり処理
@@ -186,10 +248,10 @@ public class PlayerControlle : MonoBehaviour
         }
     }
 
-    private IEnumerator InvincibleTime()
+    private IEnumerator InvencibleTime()
     {
-        isInvincible=true;
-        yield return new WaitForSeconds(invincibleTime);
-        isInvincible=false;
+        isInvencible=true;
+        yield return new WaitForSeconds(invencibleTime);
+        isInvencible=false;
     }
 }

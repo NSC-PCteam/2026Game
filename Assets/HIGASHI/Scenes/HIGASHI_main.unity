@@ -46458,6 +46458,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3191275769773206641, guid: 96a093b55e284f844b146796563a0345, type: 3}
+      propertyPath: nextSceneName
+      value: Ume_StartScene
+      objectReference: {fileID: 0}
     - target: {fileID: 4826820547501510584, guid: 96a093b55e284f844b146796563a0345, type: 3}
       propertyPath: m_Name
       value: UISystem

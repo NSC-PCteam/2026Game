@@ -151,8 +151,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7192a41865ee66a42b7c396b2277d476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloorSwitch
+  switchRenderer: {fileID: 5880526983134030043}
+  offColor: {r: 0, g: 1, b: 1, a: 1}
+  onColor: {r: 0.9960785, g: 0.18039216, b: 1, a: 1}
   showWhenOn:
   - {fileID: 0}
+  - {fileID: 0}
   hideWhenOn:
+  - {fileID: 0}
   - {fileID: 0}
   switchIsOn: 0

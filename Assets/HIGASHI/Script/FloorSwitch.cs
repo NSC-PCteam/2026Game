@@ -1,22 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FloorSwitch : MonoBehaviour
 {
     [Header("スイッチの見た目")]
-    public SpriteRenderer switchRenderer;
-    public Color offColor = Color.red;
-    public Color onColor = Color.green;
+    [SerializeField] private SpriteRenderer switchRenderer;
+    [SerializeField] private Color offColor = Color.red;
+    [SerializeField] private Color onColor = Color.green;
 
     [Header("ONのときに表示するブロック")]
-    public GameObject[] showWhenOn;
+    [SerializeField] private GameObject[] showWhenOn;
 
     [Header("ONのときに消すブロック")]
-    public GameObject[] hideWhenOn;
+    [SerializeField] private GameObject[] hideWhenOn;
 
     [Header("開始時の設定")]
-    public bool switchIsOn = false;
+    [SerializeField] private bool switchIsOn = false;
 
-    private bool playerIsOnSwitch = false;
+    // 現在スイッチに触れているPlayerのColliderを記録する
+    private readonly HashSet<Collider2D> playerColliders =
+        new HashSet<Collider2D>();
 
     void Start()
     {
@@ -25,50 +28,73 @@ public class FloorSwitch : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Player"))
+        Debug.Log("Trigger");
+        // 接触したColliderの親からPlayerRespawnを探す
+        PlayerRespawn playerRespawn =
+            other.GetComponentInParent<PlayerRespawn>();
+
+        // PlayerRespawnが見つからなければPlayerではない
+        if (playerRespawn == null)
         {
             return;
         }
 
-        if (playerIsOnSwitch)
+        // 同じColliderがすでに登録されている場合は何もしない
+        if (!playerColliders.Add(other))
         {
             return;
         }
 
-        playerIsOnSwitch = true;
+        // 最初のPlayer Colliderが入ったときだけ切り替える
+        if (playerColliders.Count == 1)
+        {
+            switchIsOn = !switchIsOn;
+            UpdateBlocks();
 
-        // ONとOFFを切り替える
-        switchIsOn = !switchIsOn;
-
-        // ブロックとスイッチの見た目を更新
-        UpdateBlocks();
+            Debug.Log(
+                $"FloorSwitchを切り替えました: " +
+                $"{(switchIsOn ? "ON" : "OFF")}",
+                this
+            );
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        PlayerRespawn playerRespawn =
+            other.GetComponentInParent<PlayerRespawn>();
+
+        if (playerRespawn == null)
         {
-            playerIsOnSwitch = false;
+            return;
         }
+
+        playerColliders.Remove(other);
     }
 
     void UpdateBlocks()
     {
         // ONのときに表示するブロック
-        foreach (GameObject block in showWhenOn)
+        if (showWhenOn != null)
         {
-            if (block != null)
+            foreach (GameObject block in showWhenOn)
             {
-                block.SetActive(switchIsOn);
+                if (block != null)
+                {
+                    block.SetActive(switchIsOn);
+                }
             }
         }
 
         // ONのときに消すブロック
-        foreach (GameObject block in hideWhenOn)
+        if (hideWhenOn != null)
         {
-            if (block != null)
+            foreach (GameObject block in hideWhenOn)
             {
-                block.SetActive(!switchIsOn);
+                if (block != null)
+                {
+                    block.SetActive(!switchIsOn);
+                }
             }
         }
 

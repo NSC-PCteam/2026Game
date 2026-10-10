@@ -3,28 +3,29 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
+  - UI
+  - player
+  - enemy
+  - water
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - dash
+  - doubleJump
+  - swim
+  - small
+  - clime
+  - invincible
+  - tfPlusTime
+  - lifePoint
+  - Ground
   - 
   - 
   - 
